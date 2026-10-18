@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DBSportStore.Models.Category>
+
+@{
+    ViewBag.Title = "Quản lý danh mục";
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+
+<h2 class="section-title">QUẢN LÝ DANH MỤC</h2>
+
+<p>
+    @Html.ActionLink("Thêm danh mục mới", "Create", null, new { @class = "btn-brand" })
+</p>
+
+<div style="overflow-x:auto;">
+    <table class="table table-bordered table-hover" style="background:white; vertical-align:middle;">
+        <thead>
+            <tr>
+                <th>Tên danh mục</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <strong>@item.CategoryName</strong>
+                    </td>
+                    <td style="white-space:nowrap;">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

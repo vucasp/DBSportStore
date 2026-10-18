@@ -1,0 +1,82 @@
+﻿@model DBSportStore.Models.Product
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+
+<h2>Xóa sản phẩm</h2>
+
+<h3>Bạn có chắc muốn xóa sản phẩm này không?</h3>
+<div>
+    <h4>Thông tin sản phẩm</h4>
+    <hr />
+    @*
+        Chỉ hiển thị ảnh khi Product có tên file trong ImageUrl.
+        File ảnh thật đang nằm trong Content/images.
+    *@
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <div style="margin:15px 0;">
+            <img src="~/Content/images/@Model.ImageUrl"
+                 alt="@Model.ProductName"
+                 style="width:180px;
+                height:180px;
+                object-fit:cover;
+                border-radius:12px;
+                border:1px solid #ddd;" />
+        </div>
+    }
+    <dl class="dl-horizontal">
+
+        <dt>Tên sản phẩm</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>Mô tả</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>Đơn giá</dt>
+
+        <dd>@Model.Price.ToString("#,##0") đ</dd>
+
+        <dt>Số lượng tồn kho</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockQuantity)
+        </dd>
+
+        <dt>Trạng thái</dt>
+
+        <dd>@(Model.IsActive ? "Đang bán" : "Ngừng bán")</dd>
+
+
+        <dt>Danh mục</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @* Gửi form POST để xóa Product hiện tại *@
+            <input type="submit"
+                   value="Xác nhận xóa"
+                   class="btn btn-danger" />
+
+            @* Quay lại trang quản lý sản phẩm nếu không muốn xóa *@
+            @Html.ActionLink("Quay lại danh sách", "Index")
+
+        </div>
+    }
+</div>

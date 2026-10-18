@@ -1,0 +1,173 @@
+﻿@model DBSportStore.Models.Product
+
+@{
+    ViewBag.Title = "Cập nhật sản phẩm";
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+
+<h2>Cập nhật sản phẩm</h2>
+
+@* Form Edit gửi dữ liệu tới ProductsController.Edit *@
+@using (Html.BeginForm(
+    "Edit",                 // Action nhận dữ liệu
+    "Products",             // Controller xử lý
+    FormMethod.Post,          // Gửi dữ liệu bằng POST
+    new
+    {
+        // BẮT BUỘC khi form có upload file
+        enctype = "multipart/form-data"
+    }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Thông tin sản phẩm</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductID)
+
+        <div class="form-group">
+            @* Chỉ đổi chữ hiển thị, vẫn giữ property ProductName *@
+            @Html.LabelFor(model => model.ProductName, "Tên sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @* Chỉ đổi nhãn Description thành Mô tả *@
+            @Html.LabelFor(model => model.Description, "Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @* Giữ DropDownList Category, chỉ đổi nhãn hiển thị *@
+            @Html.LabelFor(model => model.CategoryID, "Danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @* Bước này chỉ đổi nhãn. Cách nhập Price sẽ sửa tiếp ở Bước 5 *@
+            @Html.LabelFor(model => model.Price, "Đơn giá", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*
+                    Price trong CSDL là DECIMAL.
+                    Dùng TextBoxFor với "{0:0}" để hiển thị giá không có phần thập phân.
+                    Ví dụ: 990000.00 hoặc 990000,00 sẽ hiển thị thành 990000.
+                *@
+                @Html.TextBoxFor(model => model.Price, "{0:0}", new { @class = "form-control", type = "number", min = "0", step = "1", placeholder = "Ví dụ: 990000" })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Nhóm hiển thị ảnh hiện tại và chọn ảnh mới -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Hình sản phẩm</label>
+
+            <div class="col-md-10">
+                <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
+
+                    @* Ảnh hiện tại *@
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img id="currentImage"
+                             src="~/Content/images/@Model.ImageUrl"
+                             alt="@Model.ProductName"
+                             style="width:120px;height:120px;
+                         object-fit:cover;border-radius:10px;
+                         border:1px solid #ddd;" />
+                    }
+
+                    @* Ảnh mới được chọn sẽ hiển thị ở đây *@
+                    <img id="newImagePreview"
+                         alt="Ảnh mới"
+                         style="display:none;width:120px;height:120px;
+                     object-fit:cover;border-radius:10px;
+                     border:1px solid #ddd;" />
+
+                    <input type="file"
+                           id="imageFile"
+                           name="imageFile"
+                           class="form-control"
+                           accept=".jpg,.jpeg,.png"
+                           onchange="previewNewImage(event)" />
+                </div>
+
+                @Html.ValidationMessage(
+                    "ImageUrl",
+                    "",
+                    new { @class = "text-danger" })
+
+                <small class="text-muted">
+                    Không chọn file mới: giữ nguyên ảnh hiện tại.
+                </small>
+            </div>
+        </div>
+
+
+        @* Số lượng tồn kho: field này phải có trong Edit để người dùng cập nhật tồn kho *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.StockQuantity, "Số lượng tồn kho", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StockQuantity, new { htmlAttributes = new { @class = "form-control", placeholder = "Ví dụ: 20" } })
+                @* Hiển thị lỗi nếu giá trị tồn kho không hợp lệ *@
+                @Html.ValidationMessageFor(model => model.StockQuantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @* Giữ checkbox IsActive, chỉ đổi nhãn sang Tiếng Việt *@
+            @Html.LabelFor(model => model.IsActive, "Trạng thái", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu thay đổi" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function previewNewImage(event) {
+        var input = event.target;
+        var preview = document.getElementById("newImagePreview");
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+        else {
+            preview.src = "";
+            preview.style.display = "none";
+        }
+    }
+</script>
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

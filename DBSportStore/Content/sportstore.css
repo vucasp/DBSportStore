@@ -1,0 +1,763 @@
+﻿:root {
+    --brand: #2563eb; /* Màu cam chủ đạo của website */
+    --brand-dark: #1d4ed8; /* Màu cam đậm, dùng khi hover */
+    --ink: #0f172a; /* Màu chữ chính */
+    --muted: #64748b; /* Màu chữ phụ, chữ mô tả */
+    --line: #e2e8f0; /* Màu đường viền */
+    --surface: #ffffff; /* Màu nền trắng của card */
+    --page: #f8fafc; /* Màu nền chung của toàn trang */
+}
+
+
+/* =========================================================
+   2. THIẾT LẬP CHUNG CHO TẤT CẢ PHẦN TỬ
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    /* Kích thước width/height sẽ bao gồm cả padding và border */
+}
+
+
+/* =========================================================
+   3. GIAO DIỆN CHUNG CỦA TRANG
+   ========================================================= */
+
+body {
+    margin: 0;
+    /* Xóa khoảng trắng mặc định xung quanh trang */
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    /* Font chữ chính; nếu không có Segoe UI sẽ dùng Arial */
+
+    color: var(--ink);
+    /* Màu chữ mặc định lấy từ biến --ink */
+
+    background: var(--page);
+    /* Màu nền toàn trang lấy từ biến --page */
+}
+
+
+/* =========================================================
+   4. THANH THÔNG BÁO TRÊN CÙNG
+   ========================================================= */
+
+.store-topbar {
+    background: #0f172a;
+    /* Nền xanh đen */
+
+    color: #cbd5e1;
+    /* Màu chữ xám sáng */
+
+    font-size: 13px;
+    /* Kích thước chữ nhỏ */
+
+    padding: 8px 0;
+    /* Khoảng cách trên/dưới 8px, trái/phải 0 */
+}
+
+
+/* =========================================================
+   5. HEADER: LOGO + MENU
+   ========================================================= */
+
+.store-header {
+    background: #ffffff;
+    /* Nền header màu trắng */
+
+    border-bottom: 1px solid var(--line);
+    /* Tạo đường viền phía dưới header */
+
+    position: sticky;
+    /* Header có thể giữ lại khi cuộn trang */
+
+    top: 0;
+    /* Header dính tại vị trí trên cùng */
+
+    z-index: 1000;
+    /* Đảm bảo header nằm phía trên các thành phần khác */
+}
+
+
+    .store-header .container {
+        min-height: 72px;
+        /* Chiều cao tối thiểu của header */
+
+        display: flex;
+        /* Sắp xếp logo và menu theo hàng ngang */
+
+        align-items: center;
+        /* Căn các phần tử theo chiều dọc vào giữa */
+
+        gap: 24px;
+        /* Khoảng cách giữa các phần tử là 24px */
+    }
+
+
+/* =========================================================
+   6. LOGO SPORTSTORE
+   ========================================================= */
+
+.brand {
+    font-size: 24px;
+    /* Kích thước chữ logo */
+
+    font-weight: 800;
+    /* Chữ rất đậm */
+
+    letter-spacing: .5px;
+    /* Tăng khoảng cách giữa các ký tự */
+
+    color: var(--ink);
+    /* Màu chữ logo */
+
+    text-decoration: none;
+    /* Bỏ gạch chân vì logo là thẻ <a> */
+}
+
+
+    .brand span {
+        color: var(--brand);
+        /* Phần chữ nằm trong <span> sử dụng màu cam */
+    }
+
+
+/* =========================================================
+   7. MENU ĐIỀU HƯỚNG
+   ========================================================= */
+
+.store-nav {
+    display: flex;
+    /* Hiển thị các mục menu trên cùng một hàng */
+
+    gap: 18px;
+    /* Khoảng cách giữa các mục menu */
+
+    align-items: center;
+    /* Căn menu theo chiều dọc vào giữa */
+
+    margin-left: auto;
+    /* Đẩy menu sang phía bên phải header */
+}
+
+
+    .store-nav a {
+        color: #334155;
+        /* Màu chữ của các liên kết */
+
+        text-decoration: none;
+        /* Bỏ gạch chân của thẻ <a> */
+
+        font-weight: 600;
+        /* Làm chữ menu đậm vừa */
+    }
+
+
+        .store-nav a:hover {
+            color: var(--brand);
+            /* Khi rê chuột vào menu, chữ đổi sang màu cam */
+        }
+
+
+/* =========================================================
+   8. HERO BANNER - VÙNG QUẢNG BÁ ĐẦU TRANG
+   ========================================================= */
+
+.hero {
+    min-height: 360px;
+    /* Chiều cao tối thiểu của banner */
+
+    border-radius: 24px;
+    /* Bo tròn bốn góc */
+
+    padding: 56px;
+    /* Khoảng cách từ nội dung tới mép banner */
+
+    margin: 28px 0;
+    /* Cách phần phía trên/dưới 28px */
+
+    color: white;
+    /* Chữ bên trong banner màu trắng */
+
+    background: linear-gradient( 110deg, rgba(15,23,42,.96), rgba(15,23,42,.55) ), linear-gradient( 135deg, #1e293b, #0f172a );
+    /* Tạo nền chuyển màu tối cho banner */
+
+    display: flex;
+    /* Sử dụng Flexbox */
+
+    align-items: center;
+    /* Căn nội dung banner vào giữa theo chiều dọc */
+}
+
+
+    .hero h1 {
+        font-size: 48px;
+        /* Kích thước tiêu đề lớn */
+
+        line-height: 1.05;
+        /* Khoảng cách giữa các dòng của tiêu đề */
+
+        margin: 0 0 14px;
+        /* Không cách trên/trái/phải, cách dưới 14px */
+
+        max-width: 650px;
+        /* Giới hạn chiều rộng tiêu đề */
+    }
+
+
+    .hero p {
+        max-width: 580px;
+        /* Giới hạn chiều rộng đoạn văn */
+
+        color: #e2e8f0;
+        /* Chữ màu xám sáng */
+
+        font-size: 18px;
+        /* Kích thước chữ mô tả */
+    }
+
+
+/* =========================================================
+   9. NÚT CHÍNH MÀU CAM
+   ========================================================= */
+
+.btn-brand {
+    display: inline-block;
+    /* Cho phép nút có padding nhưng vẫn nằm cùng dòng */
+
+    background: var(--brand);
+    /* Nền nút màu cam */
+
+    color: white !important;
+    /* Chữ màu trắng; !important ưu tiên thuộc tính này */
+
+    border: 0;
+    /* Không có đường viền */
+
+    border-radius: 10px;
+    /* Bo góc nút */
+
+    padding: 11px 18px;
+    /* Khoảng cách bên trong nút */
+
+    text-decoration: none;
+    /* Bỏ gạch chân nếu nút là thẻ <a> */
+
+    font-weight: 700;
+    /* Chữ đậm */
+}
+
+
+    .btn-brand:hover {
+        background: var(--brand-dark);
+        /* Khi rê chuột, nền nút chuyển sang cam đậm */
+    }
+
+
+/* =========================================================
+   10. TIÊU ĐỀ CÁC KHU VỰC
+   ========================================================= */
+
+.section-title {
+    margin: 34px 0 16px;
+    /* Cách trên 34px, dưới 16px */
+
+    font-size: 28px;
+    /* Kích thước tiêu đề */
+
+    font-weight: 800;
+    /* Chữ rất đậm */
+}
+
+
+/* =========================================================
+   11. KHUNG CHÍNH: DANH MỤC + DANH SÁCH SẢN PHẨM
+   ========================================================= */
+
+.store-shell {
+    display: grid;
+    /* Sử dụng CSS Grid */
+
+    grid-template-columns: 230px minmax(0,1fr);
+    /* Cột trái rộng 230px,
+       cột phải chiếm toàn bộ phần còn lại */
+
+    gap: 24px;
+    /* Khoảng cách giữa hai cột */
+
+    align-items: start;
+    /* Các phần tử bắt đầu từ phía trên */
+}
+
+
+/* =========================================================
+   12. CỘT DANH MỤC BÊN TRÁI
+   ========================================================= */
+
+.category-panel {
+    background: white;
+    /* Nền trắng */
+
+    border: 1px solid var(--line);
+    /* Đường viền xám nhạt */
+
+    border-radius: 16px;
+    /* Bo góc */
+
+    padding: 18px;
+    /* Khoảng cách nội dung tới viền */
+
+    position: sticky;
+    /* Giữ bảng danh mục khi cuộn */
+
+    top: 92px;
+    /* Cách mép trên 92px khi sticky */
+}
+
+
+    .category-panel h3 {
+        margin-top: 0;
+        /* Bỏ khoảng cách phía trên tiêu đề */
+
+        font-size: 18px;
+        /* Kích thước chữ tiêu đề danh mục */
+    }
+
+
+.category-list {
+    list-style: none;
+    /* Bỏ dấu chấm đầu dòng của <ul> */
+
+    padding: 0;
+    /* Bỏ padding mặc định */
+
+    margin: 0;
+    /* Bỏ margin mặc định */
+}
+
+
+    .category-list a {
+        display: block;
+        /* Mỗi link chiếm cả một dòng */
+
+        padding: 10px 12px;
+        /* Khoảng cách bên trong */
+
+        margin-bottom: 6px;
+        /* Khoảng cách giữa các mục danh mục */
+
+        border-radius: 10px;
+        /* Bo góc */
+
+        color: #334155;
+        /* Màu chữ */
+
+        text-decoration: none;
+        /* Bỏ gạch chân */
+    }
+
+
+        .category-list a:hover {
+            background: #fff7ed;
+            /* Khi rê chuột, nền chuyển sang cam rất nhạt */
+
+            color: var(--brand-dark);
+            /* Chữ chuyển sang cam đậm */
+        }
+
+
+/* =========================================================
+   13. LƯỚI SẢN PHẨM
+   ========================================================= */
+
+.product-grid {
+    display: grid;
+    /* Hiển thị sản phẩm bằng CSS Grid */
+
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    /* Chia thành 4 cột bằng nhau */
+
+    gap: 18px;
+    /* Khoảng cách giữa các card */
+}
+
+
+/* =========================================================
+   14. PRODUCT CARD
+   ========================================================= */
+
+.product-card {
+    background: white;
+    /* Nền card màu trắng */
+
+    border: 1px solid var(--line);
+    /* Viền xám nhạt */
+
+    border-radius: 16px;
+    /* Bo góc card */
+
+    overflow: hidden;
+    /* Ẩn phần ảnh/nội dung vượt ra khỏi góc bo */
+
+    transition: transform .2s, box-shadow .2s;
+    /* Tạo hiệu ứng chuyển động mượt khi hover */
+}
+
+
+    .product-card:hover {
+        transform: translateY(-4px);
+        /* Khi hover card dịch lên trên 4px */
+
+        box-shadow: 0 14px 30px rgba(15,23,42,.10);
+        /* Tạo bóng đổ cho card */
+    }
+
+
+/* =========================================================
+   15. ẢNH SẢN PHẨM
+   ========================================================= */
+
+.product-image {
+    height: 220px;
+    /* Chiều cao cố định của khung ảnh */
+
+    background: #f1f5f9;
+    /* Nền xám nhạt nếu ảnh chưa phủ hết */
+
+    display: flex;
+    /* Sử dụng Flexbox */
+
+    align-items: center;
+    /* Căn ảnh giữa theo chiều dọc */
+
+    justify-content: center;
+    /* Căn ảnh giữa theo chiều ngang */
+
+    overflow: hidden;
+    /* Ẩn phần ảnh vượt ra ngoài khung */
+}
+
+
+    .product-image img {
+        width: 100%;
+        /* Ảnh rộng bằng toàn bộ khung */
+
+        height: 100%;
+        /* Ảnh cao bằng toàn bộ khung */
+
+        object-fit: cover;
+        /* Ảnh lấp đầy khung mà không bị méo;
+       phần dư có thể bị cắt */
+    }
+
+
+/* =========================================================
+   16. THÔNG TIN SẢN PHẨM
+   ========================================================= */
+
+.product-body {
+    padding: 16px;
+    /* Khoảng cách giữa nội dung và mép card */
+}
+
+
+.product-name {
+    font-weight: 700;
+    /* Tên sản phẩm in đậm */
+
+    min-height: 44px;
+    /* Giữ vùng tên có chiều cao tối thiểu giống nhau */
+
+    margin-bottom: 8px;
+    /* Cách phần giá bên dưới 8px */
+}
+
+
+/* =========================================================
+   17. GIÁ SẢN PHẨM
+   ========================================================= */
+
+.product-price {
+    color: #dc2626;
+    /* Giá có màu đỏ */
+
+    font-size: 20px;
+    /* Kích thước chữ giá */
+
+    font-weight: 800;
+    /* Giá hiển thị đậm */
+}
+
+
+/* =========================================================
+   18. NHÓM NÚT CHI TIẾT / MUA
+   ========================================================= */
+
+.product-actions {
+    display: flex;
+    /* Các nút nằm cùng hàng */
+
+    gap: 8px;
+    /* Khoảng cách giữa các nút */
+
+    margin-top: 14px;
+    /* Cách phần phía trên 14px */
+}
+
+
+.btn-soft {
+    border: 1px solid var(--line);
+    /* Đường viền nút */
+
+    border-radius: 9px;
+    /* Bo góc */
+
+    padding: 9px 12px;
+    /* Khoảng cách bên trong */
+
+    color: #334155;
+    /* Màu chữ */
+
+    text-decoration: none;
+    /* Bỏ gạch chân */
+
+    background: white;
+    /* Nền trắng */
+}
+
+
+/* =========================================================
+   19. KHU VỰC TÌM KIẾM
+   SẼ DÙNG Ở BUỔI 06
+   ========================================================= */
+
+.search-panel {
+    background: white;
+    /* Nền trắng */
+
+    border: 1px solid var(--line);
+    /* Đường viền xám */
+
+    border-radius: 16px;
+    /* Bo góc */
+
+    padding: 16px;
+    /* Khoảng cách bên trong */
+
+    margin-bottom: 18px;
+    /* Cách danh sách sản phẩm phía dưới */
+}
+
+
+.form-control-modern {
+    width: 100%;
+    /* Ô nhập chiếm toàn bộ chiều rộng */
+
+    border: 1px solid #cbd5e1;
+    /* Viền ô nhập */
+
+    border-radius: 10px;
+    /* Bo góc */
+
+    padding: 11px 12px;
+    /* Khoảng cách chữ bên trong ô */
+
+    outline: none;
+    /* Bỏ đường outline mặc định của browser */
+}
+
+
+    .form-control-modern:focus {
+        border-color: #fb923c;
+        /* Khi click vào ô nhập, viền chuyển sang cam */
+
+        box-shadow: 0 0 0 3px #ffedd5;
+        /* Tạo vòng sáng quanh ô nhập */
+    }
+
+
+/* =========================================================
+   20. CARD LOGIN / CHECKOUT / ADMIN
+   DÙNG Ở CÁC BUỔI SAU
+   ========================================================= */
+
+.auth-card,
+.checkout-card,
+.admin-card {
+    max-width: 520px;
+    /* Chiều rộng tối đa của card */
+
+    margin: 38px auto;
+    /* Cách trên/dưới 38px và căn giữa theo chiều ngang */
+
+    background: white;
+    /* Nền trắng */
+
+    border: 1px solid var(--line);
+    /* Viền xám nhạt */
+
+    border-radius: 20px;
+    /* Bo góc */
+
+    padding: 28px;
+    /* Khoảng cách nội dung với mép */
+
+    box-shadow: 0 16px 40px rgba(15,23,42,.08);
+    /* Tạo bóng nhẹ */
+}
+
+
+/* =========================================================
+   21. BẢNG GIỎ HÀNG
+   DÙNG Ở BUỔI 07
+   ========================================================= */
+
+.cart-table {
+    width: 100%;
+    /* Bảng chiếm toàn bộ chiều rộng */
+
+    background: white;
+    /* Nền bảng màu trắng */
+
+    border-collapse: collapse;
+    /* Gộp các đường viền của table */
+
+    border-radius: 16px;
+    /* Bo góc bảng */
+
+    overflow: hidden;
+    /* Không cho nội dung vượt khỏi góc bo */
+}
+
+
+    .cart-table th,
+    .cart-table td {
+        padding: 14px;
+        /* Khoảng cách nội dung trong từng ô */
+
+        border-bottom: 1px solid var(--line);
+        /* Đường phân cách giữa các hàng */
+
+        vertical-align: middle;
+        /* Căn nội dung giữa theo chiều dọc */
+    }
+
+
+/* =========================================================
+   22. KHUNG TỔNG TIỀN GIỎ HÀNG
+   ========================================================= */
+
+.cart-summary {
+    margin-left: auto;
+    /* Đẩy khung sang bên phải */
+
+    max-width: 360px;
+    /* Chiều rộng tối đa */
+
+    background: white;
+    /* Nền trắng */
+
+    border: 1px solid var(--line);
+    /* Đường viền */
+
+    border-radius: 16px;
+    /* Bo góc */
+
+    padding: 20px;
+    /* Khoảng cách bên trong */
+}
+
+
+/* =========================================================
+   23. FOOTER
+   ========================================================= */
+
+.store-footer {
+    margin-top: 48px;
+    /* Cách nội dung phía trên 48px */
+
+    padding: 40px 0;
+    /* Khoảng cách trên/dưới 40px */
+
+    color: #cbd5e1;
+    /* Màu chữ xám sáng */
+
+    background: #0f172a;
+    /* Nền xanh đen */
+}
+
+
+    .store-footer strong {
+        color: white;
+        /* Chữ SPORTSTORE trong footer màu trắng */
+    }
+
+
+/* =========================================================
+   24. RESPONSIVE CHO TABLET
+   Khi màn hình <= 992px
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        /* Giảm lưới sản phẩm từ 4 cột xuống 2 cột */
+    }
+
+
+    .store-shell {
+        grid-template-columns: 1fr;
+        /* Danh mục và sản phẩm chuyển thành một cột */
+    }
+
+
+    .category-panel {
+        position: static;
+        /* Tắt sticky của danh mục trên màn hình nhỏ */
+    }
+}
+
+
+/* =========================================================
+   25. RESPONSIVE CHO MOBILE
+   Khi màn hình <= 640px
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .hero {
+        padding: 28px;
+        /* Giảm padding của banner */
+
+        min-height: 300px;
+        /* Giảm chiều cao banner */
+    }
+
+
+        .hero h1 {
+            font-size: 36px;
+            /* Giảm kích thước tiêu đề banner */
+        }
+
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        /* Mỗi hàng chỉ còn 1 sản phẩm */
+    }
+
+
+    .store-nav {
+        gap: 10px;
+        /* Giảm khoảng cách giữa menu */
+
+        font-size: 13px;
+        /* Giảm kích thước chữ menu */
+    }
+    .product-description {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 8px;
+        min-height: 32px;
+    }
+}

@@ -1,0 +1,65 @@
+﻿@* View nhận danh sách ProductCardViewModel từ StoreController *@
+@model IEnumerable<DBSportStore.Models.ProductCardViewModel>
+
+@* Thiết lập tiêu đề và Layout dùng chung *@
+@{
+    ViewBag.Title = "Trang chủ"; // tiêu đề trên tab trình duyệt
+    Layout = "~/Views/Shared/_StoreLayout.cshtml"; // dùng Layout chung
+}
+
+<!-- ===== HERO BANNER ===== -->
+<section class="hero">
+    <div>
+        <p>NEW SEASON / SPORT & ACTIVE</p>
+        <h1>Move better. Train stronger.</h1>
+        <p>Khám phá bộ sưu tập thể thao dành cho tập luyện, thi đấu và phong cách sống năng động.</p>
+        <a class="btn-brand" href="#featured-products">Mua sắm ngay</a>
+    </div>
+</section>
+
+<!-- Tiêu đề khu vực sản phẩm nổi bật -->
+<h2 class="section-title">Tất cả sản phẩm</h2>
+
+<!-- ===== KHUNG CHÍNH: danh mục trái + sản phẩm phải ===== -->
+<div class="store-shell" id="featured-products">
+    <!-- Danh mục tạm; Buổi 06 sẽ lấy từ database -->
+    <aside class="category-panel">
+        <h3>Danh mục</h3>
+        <ul class="category-list">
+            <li><a href="#">Giày thể thao</a></li>
+            <li><a href="#">Áo quần thi đấu</a></li>
+            <li><a href="#">Dụng cụ thể thao</a></li>
+            <li><a href="#">Phụ kiện thể thao</a></li>
+        </ul>
+    </aside>
+
+    <section>
+        <!-- Lưới chứa các Product Card -->
+        <div class="product-grid">
+            @* Duyệt từng sản phẩm trong Model *@
+            @foreach (var item in Model)
+            {
+                <!-- Một card tương ứng một sản phẩm -->
+                <article class="product-card">
+                    <!-- Hiển thị ảnh từ Content/images -->
+                    <div class="product-image">
+                        <img src="~/Content/images/@item.ImagePro" alt="@item.NamePro" /> @* lấy tên ảnh từ item.ImagePro *@
+                    </div>
+                    <!-- Thông tin sản phẩm: danh mục, tên, giá -->
+                    <div class="product-body">
+                        <div style="color:#64748b;font-size:13px;">@item.CategoryName</div>
+                        <div class="product-name">@item.NamePro</div>
+                        <div class="product-price">@item.Price.ToString("#,##0") đ</div> @* định dạng giá có phân cách hàng nghìn *@
+                        <!-- Nút Chi tiết/Mua sẽ nối chức năng ở buổi sau -->
+                        <div class="product-description">@item.ShortDescription</div>
+
+                        <div class="product-actions">
+                            <a class="btn-soft" href="#">Chi tiết</a>
+                            <a class="btn-brand" href="#">Mua</a>
+                        </div>
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
+</div>

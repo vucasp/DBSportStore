@@ -1,0 +1,66 @@
+﻿@* ===== LAYOUT DÙNG CHUNG CHO TOÀN WEBSITE ===== *@
+<!DOCTYPE html>
+<html>
+@* HEAD: tiêu đề, CSS và script dùng chung *@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - SportStore</title> @* Tiêu đề thay đổi theo từng View *@
+    @Styles.Render("~/Content/css") @* CSS mặc định của project *@
+    <link href="~/Content/sportstore.css" rel="stylesheet" /> @* CSS riêng của SportStore *@
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@* BODY: phần giao diện hiển thị trên trình duyệt *@
+<body>
+    <!-- Thanh thông báo phía trên cùng -->
+    <div class="store-topbar">
+        <div class="container">Miễn phí giao hàng cho đơn từ 1.000.000đ</div>
+    </div>
+
+    <!-- Header: logo và menu điều hướng -->
+    <header class="store-header">
+        <div class="container">
+            <a class="brand" href="@Url.Action("Index","Store")">SPORT<span>STORE</span></a>
+
+            <!-- Menu chính của website -->
+            <nav class="store-nav">
+                @* Các trang đã có Controller *@
+                @Html.ActionLink("Giới thiệu", "AboutStore", "Store")
+                @Html.ActionLink("Trang chủ", "Index", "Store")
+
+                @* CRUD sản phẩm - đã thực hiện trong phần chính B05 *@
+                @Html.ActionLink("Quản lý sản phẩm", "Index", "Products")
+
+                @* Bài tập cuối B05 sẽ tạo CategoriesController *@
+                @Html.ActionLink("Quản lý danh mục", "Index", "Categories")
+
+                @* Chức năng quản trị sẽ thực hiện khi có Login/Role Admin ở B08 *@
+                <a href="#">Quản lý khách hàng</a>
+                <a href="#">Quản lý đơn hàng</a>
+
+                @* Các chức năng sẽ thực hiện ở các buổi sau *@
+                <a href="#">Giỏ hàng</a>
+                <
+
+</div>
+    </header>
+
+    <!-- Nội dung của từng View sẽ được chèn vào đây -->
+    <main class="container">
+        @RenderBody() @* Chèn nội dung View hiện tại *@
+    </main>
+
+    <!-- Footer dùng chung -->
+    <footer class="store-footer">
+        <div class="container">
+            <strong>SPORTSTORE</strong><br />
+            Website thương mại thực hành ASP.NET MVC5
+        </div>
+    </footer>
+
+    @* Nạp JavaScript ở cuối trang *@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false) @* Cho phép View thêm script riêng *@
+</body>
+</html>
