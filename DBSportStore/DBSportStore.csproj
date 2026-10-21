@@ -170,6 +170,7 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>DBSportStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StoreHomeViewModel.cs" />
     <Compile Include="Models\UserAccount.cs">
       <DependentUpon>DBSportStoreModel.tt</DependentUpon>
     </Compile>

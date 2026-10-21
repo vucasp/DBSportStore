@@ -754,10 +754,204 @@ body {
         font-size: 13px;
         /* Giảm kích thước chữ menu */
     }
+
     .product-description {
         font-size: 12px;
         color: var(--muted);
         margin-bottom: 8px;
         min-height: 32px;
     }
+}
+
+/* =========================================================
+   B06 - TÌM KIẾM
+   Các style dùng cho thanh tìm kiếm và thông báo không có kết quả
+   ========================================================= */
+
+
+/* ==================== THANH TÌM KIẾM ==================== */
+
+/* Khối bao ngoài toàn bộ khu vực tìm kiếm */
+.catalog-toolbar {
+    margin: 20px 0 24px;
+    /* Khoảng cách:
+       - trên: 20px
+       - phải: 0
+       - dưới: 24px
+       - trái: 0
+    */
+}
+
+
+/* Form tìm kiếm */
+.catalog-search {
+    display: flex;
+    /* Sắp xếp ô nhập, nút Tìm kiếm, nút Xóa lọc
+       nằm trên cùng một hàng */
+
+    gap: 10px;
+    /* Khoảng cách giữa các phần tử trong form là 10px */
+
+    flex-wrap: wrap;
+    /* Nếu màn hình hẹp, các phần tử được phép xuống hàng
+       thay vì tràn ra ngoài */
+}
+
+
+    /* ==================== Ô NHẬP TỪ KHÓA ==================== */
+
+    /* Áp dụng chung cho ô từ khóa và hai ô Giá từ/Giá đến cho input type="text"
+nằm bên trong class catalog-search */
+    .catalog-search input[type="text"],
+    .catalog-search input[type="number"] {
+        flex: 1; /* Các ô tự giãn theo chiều ngang */
+        min-width: 170px; /* Không cho ô quá hẹp */
+        padding: 11px 14px; /* Khoảng cách chữ với viền */
+        border: 1px solid #cbd5e1; /* Viền xám nhạt */
+        border-radius: 10px; /* Bo góc */
+        outline: none; /* Bỏ outline mặc định */
+    }
+
+
+
+/* ==================== KHÔNG CÓ KẾT QUẢ ==================== */
+
+/* Khối thông báo khi Model.Products không có sản phẩm */
+.catalog-empty {
+    padding: 24px;
+    /* Tạo khoảng trống bên trong khối thông báo */
+
+    background: #ffffff;
+    /* Nền màu trắng */
+
+    border: 1px solid #e2e8f0;
+    /* Viền xám nhạt */
+
+    border-radius: 12px;
+    /* Bo tròn góc khối thông báo */
+
+    color: #64748b;
+    /* Màu chữ xám xanh nhạt */
+
+    text-align: center;
+    /* Canh giữa nội dung trong khối */
+}
+    /* Tiêu đề trong khối không có kết quả */
+    .catalog-empty h3 {
+        margin-bottom: 8px;
+        /* Tạo khoảng cách dưới tiêu đề */
+    }
+
+
+    /* Đoạn mô tả trong khối không có kết quả */
+    .catalog-empty p {
+        margin-bottom: 18px;
+        /* Tạo khoảng cách trước nút */
+
+        color: #64748b;
+        /* Dùng màu chữ nhẹ hơn tiêu đề */
+    }
+
+/* =========================================================
+   B06 - PHÂN TRANG
+   Các style dùng cho các nút Trước, số trang, Sau
+   ========================================================= */
+
+
+/* ==================== KHỐI PHÂN TRANG ==================== */
+
+/* Khối bao ngoài toàn bộ các nút phân trang */
+.store-pagination {
+    display: flex;
+    /* Sắp xếp các nút phân trang trên cùng một hàng */
+
+    justify-content: center;
+    /* Canh giữa toàn bộ nhóm nút phân trang */
+
+    gap: 6px;
+    /* Khoảng cách giữa các nút là 6px */
+
+    flex-wrap: wrap;
+    /* Nếu màn hình hẹp, các nút được phép xuống hàng */
+
+    margin-top: 24px;
+    /* Tạo khoảng cách 24px phía trên,
+       tách phân trang khỏi danh sách sản phẩm */
+}
+
+
+    /* ==================== KIỂU CHUNG CHO CÁC NÚT ==================== */
+
+    /* Áp dụng chung cho:
+   - thẻ <a>: các trang có thể click
+   - thẻ <span>: trang hiện tại */
+    .store-pagination a,
+    .store-pagination span {
+        min-width: 36px;
+        /* Chiều rộng tối thiểu của mỗi nút */
+
+        padding: 8px 11px;
+        /* Khoảng cách nội dung với viền:
+       - trên/dưới: 8px
+       - trái/phải: 11px
+    */
+
+        border: 1px solid #cbd5e1;
+        /* Viền xám nhạt dày 1px */
+
+        border-radius: 8px;
+        /* Bo tròn các góc của nút */
+
+        background: #ffffff;
+        /* Nền trắng */
+
+        color: #0f172a;
+        /* Màu chữ xanh đen */
+
+        text-decoration: none;
+        /* Bỏ gạch chân mặc định của thẻ <a> */
+
+        text-align: center;
+        /* Canh giữa số trang hoặc chữ trong nút */
+    }
+
+
+    /* ==================== TRANG HIỆN TẠI ==================== */
+
+    /* Áp dụng cho:
+   <span class="active">...</span>
+   để làm nổi bật trang đang xem */
+    .store-pagination .active {
+        background: #2563eb;
+        /* Nền xanh cho trang hiện tại */
+
+        color: #ffffff;
+        /* Chữ màu trắng */
+
+        border-color: #2563eb;
+        /* Viền cùng màu với nền */
+
+        font-weight: 700;
+        /* Chữ đậm để trang hiện tại nổi bật hơn */
+    }
+
+
+    /* ==================== HIỆU ỨNG KHI RÊ CHUỘT ==================== */
+
+    /* Khi rê chuột lên các link phân trang */
+    .store-pagination a:hover {
+        background: #f1f5f9;
+        /* Đổi nền sang xám nhạt để người dùng biết
+       đây là nút có thể click */
+    }
+
+/* Làm nổi bật danh mục đang chọn */
+ul.category-list li a.active-category,
+ul.category-list li a.active-category:hover {
+    background: #fff7ed !important; /* Màu nền cam nhạt cố định */
+    color: #0f172a !important; /* Màu chữ đậm */
+    font-weight: 700 !important; /* Chữ in đậm */
+    border-left: 4px solid #2563eb !important; /* Viền xanh bên trái */
+    display: block !important; /* Hiển thị dạng khối để ăn trọn chiều ngang */
+    padding-left: 12px; /* Canh lề trái cho đẹp mắt */
 }
