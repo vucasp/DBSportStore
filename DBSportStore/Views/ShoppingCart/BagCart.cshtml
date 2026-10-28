@@ -1,0 +1,18 @@
+﻿@* Link mở trang Giỏ hàng *@
+@* ShowCart: Action hiển thị giỏ hàng
+    ShoppingCart: Controller xử lý giỏ hàng *@
+<a href="@Url.Action(
+    "ShowCart",
+    "ShoppingCart")">
+
+    @* Hiển thị tổng số lượng sản phẩm trong giỏ *@
+    Giỏ hàng (@ViewBag.CartQty)
+
+    -
+
+    @* Hiển thị tổng tiền, có dấu phân cách hàng nghìn *@
+    @String.Format(
+                "{0:#,##0} đ",
+                ViewBag.CartTotal)
+</a>
+

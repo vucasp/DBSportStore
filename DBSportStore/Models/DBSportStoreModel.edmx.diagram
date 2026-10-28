@@ -8,16 +8,16 @@
         <EntityTypeShape EntityType="DBSportStoreModel.Category" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStoreModel.Customer" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStoreModel.OrderDetail" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBSportStoreModel.OrderPro" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStoreModel.Product" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStoreModel.Role" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStoreModel.UserAccount" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="DBSportStoreModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="DBSportStoreModel.FK_Customer_UserAccount" ManuallyRouted="false" />
-        <AssociationConnector Association="DBSportStoreModel.FK_OrderPro_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="DBSportStoreModel.FK_OrderDetail_OrderPro" ManuallyRouted="false" />
         <AssociationConnector Association="DBSportStoreModel.FK_OrderDetail_Product" ManuallyRouted="false" />
         <AssociationConnector Association="DBSportStoreModel.FK_UserAccount_Role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBSportStoreModel.OrderPro" Width="1.5" PointX="7.5" PointY="0.75" />
+        <AssociationConnector Association="DBSportStoreModel.FK_OrderPro_Customer" />
+        <AssociationConnector Association="DBSportStoreModel.FK_OrderDetail_OrderPro" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

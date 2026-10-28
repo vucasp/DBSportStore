@@ -100,7 +100,25 @@
                             </div>
                             <div class="product-actions">
                                 @Html.ActionLink("Chi tiết", "Details", "Products", new { id = item.ProductID }, new { @class = "btn-soft" })
-                                <a class="btn-brand" href="#">Mua</a>
+                                @* B07 mới thực hiện chức năng Giỏ hàng *@
+                                @* Kiểm tra tồn kho của sản phẩm *@
+                                @if (item.StockQuantity > 0)
+                                {
+                                    @Html.ActionLink(
+                                         "Mua",
+                                         "AddToCart",
+                                         "ShoppingCart",
+                                         new { id = item.ProductID },
+                                         new { @class = "btn-brand" }
+                                    )
+                                }
+                                else
+                                {
+                                    <span class="btn-disabled" style="background-color: #cbd5e1; color: #64748b; padding: 8px 16px; border-radius: 8px; display: inline-block; cursor: not-allowed;">
+                                        Hết hàng
+                                    </span>
+                                }
+
                             </div>
                         </div>
                     </article>

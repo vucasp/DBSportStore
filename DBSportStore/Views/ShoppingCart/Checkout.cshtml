@@ -1,0 +1,306 @@
+﻿@* View này nhận dữ liệu kiểu CheckoutViewModel *@
+@model DBSportStore.Models.CheckoutViewModel
+
+@{
+    // Tiêu đề trang và Layout chung của website
+    ViewBag.Title = "Đặt hàng";
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+
+<h2 class="section-title">Thông tin đặt hàng</h2>
+
+
+@* ==================== THÔNG BÁO KIỂM TRA CHECKOUT ==================== *@
+
+@* Nếu Controller gửi CheckoutTest qua ViewBag
+    thì hiển thị thông báo cho người dùng *@
+@if (ViewBag.CheckoutTest != null)
+{
+    <div class="cart-message cart-message-success">
+        @ViewBag.CheckoutTest
+    </div>
+}
+
+
+@* ==================== BỐ CỤC CHÍNH CỦA TRANG CHECKOUT ==================== *@
+
+@* checkout-grid chia trang thành 2 phần:
+    - bên trái: form nhập thông tin khách hàng
+    - bên phải: tóm tắt đơn hàng *@
+<div class="checkout-grid">
+
+
+    @* =========================================================
+        CỘT TRÁI - FORM THÔNG TIN KHÁCH HÀNG
+        ========================================================= *@
+
+    <section class="checkout-form">
+
+        <h3>Thông tin khách hàng</h3>
+
+
+        @* Form gửi dữ liệu bằng POST
+            đến ShoppingCartController.Checkout() *@
+        @using (Html.BeginForm(
+            "Checkout",          // Action nhận dữ liệu
+            "ShoppingCart",      // ShoppingCartController
+            FormMethod.Post))    // Gửi dữ liệu bằng POST
+        {
+            @* Token bảo vệ form POST khỏi request giả mạo *@
+            @Html.AntiForgeryToken()
+
+
+            @* Hiển thị các lỗi Validation chung của form *@
+            @Html.ValidationSummary(
+                     true,
+                     "",
+                     new { @class = "text-danger" })
+
+
+            @* ==================== HỌ TÊN ==================== *@
+            <div class="checkout-row">
+
+                @* Cột bên trái: Label *@
+                <div class="checkout-label">
+                    @Html.LabelFor(m => m.FullName)
+                </div>
+
+
+                @* Cột bên phải: ô nhập và lỗi Validation *@
+                <div class="checkout-input">
+
+                    @* TextBoxFor liên kết trực tiếp với property FullName
+                        trong CheckoutViewModel *@
+                    @Html.TextBoxFor(
+                             m => m.FullName,
+                             new
+                             {
+                                 @class = "form-control-modern",
+                                 placeholder = "Nguyễn Văn A"
+                             })
+
+                    @* Hiển thị lỗi riêng của FullName nếu nhập sai *@
+                    @Html.ValidationMessageFor(
+                             m => m.FullName,
+                             "",
+                             new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            @* ==================== SỐ ĐIỆN THOẠI ==================== *@
+            <div class="checkout-row">
+
+                <div class="checkout-label">
+                    @Html.LabelFor(m => m.Phone)
+                </div>
+
+                <div class="checkout-input">
+
+                    @* Ô nhập số điện thoại *@
+                    @Html.TextBoxFor(
+                             m => m.Phone,
+                             new
+                             {
+                                 @class = "form-control-modern",
+                                 placeholder = "0901234567"
+                             })
+
+                    @* Hiển thị lỗi Validation của Phone *@
+                    @Html.ValidationMessageFor(
+                             m => m.Phone,
+                             "",
+                             new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            @* ==================== EMAIL ==================== *@
+            <div class="checkout-row">
+
+                <div class="checkout-label">
+                    @Html.LabelFor(m => m.Email)
+                </div>
+
+                <div class="checkout-input">
+
+                    @* Ô nhập Email *@
+                    @Html.TextBoxFor(
+                             m => m.Email,
+                             new
+                             {
+                                 @class = "form-control-modern",
+                                 placeholder = "email@example.com"
+                             })
+
+                    @* Hiển thị lỗi nếu Email sai định dạng
+                        hoặc vi phạm Validation trong ViewModel *@
+                    @Html.ValidationMessageFor(
+                             m => m.Email,
+                             "",
+                             new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            @* ==================== ĐỊA CHỈ KHÁCH HÀNG ==================== *@
+            <div class="checkout-row">
+
+                <div class="checkout-label">
+                    @Html.LabelFor(m => m.Address)
+                </div>
+
+                <div class="checkout-input">
+
+                    @* Địa chỉ liên hệ của khách hàng *@
+                    @Html.TextBoxFor(
+                             m => m.Address,
+                             new
+                             {
+                                 @class = "form-control-modern",
+                                 placeholder = "Địa chỉ liên hệ"
+                             })
+
+                    @Html.ValidationMessageFor(
+                             m => m.Address,
+                             "",
+                             new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            @* ==================== ĐỊA CHỈ GIAO HÀNG ==================== *@
+            <div class="checkout-row">
+
+                <div class="checkout-label">
+                    @Html.LabelFor(m => m.ShippingAddress)
+                </div>
+
+                <div class="checkout-input">
+
+                    @* Địa chỉ thực tế dùng để giao đơn hàng *@
+                    @Html.TextBoxFor(
+                             m => m.ShippingAddress,
+                             new
+                             {
+                                 @class = "form-control-modern",
+                                 placeholder = "Địa chỉ nhận hàng"
+                             })
+
+                    @Html.ValidationMessageFor(
+                             m => m.ShippingAddress,
+                             "",
+                             new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            @* ==================== NÚT SUBMIT ==================== *@
+            <div class="checkout-row checkout-row-action">
+
+                @* Giữ cột Label trống để nút nằm thẳng hàng với các ô nhập *@
+                <div class="checkout-label"></div>
+
+                <div class="checkout-input">
+
+                    @* Khi click, form POST về action Checkout *@
+                    @* Gửi thông tin Checkout để tạo đơn hàng *@
+                    <button type="submit"
+                            class="btn-brand">
+                        Đặt hàng
+                    </button>
+
+
+                </div>
+
+            </div>
+        }
+
+    </section>
+
+
+    @* =========================================================
+        CỘT PHẢI - TÓM TẮT ĐƠN HÀNG
+        ========================================================= *@
+
+    <aside class="checkout-summary">
+
+        <h3>Đơn hàng của bạn</h3>
+
+
+        @* Duyệt từng CartItem đang có trong giỏ hàng *@
+        @foreach (var item in Model.Cart.Items)
+        {
+            <div class="checkout-product">
+
+
+                @* ==================== ẢNH SẢN PHẨM ==================== *@
+                <div class="checkout-product-image">
+
+                    @* ImageUrl là tên file ảnh của Product *@
+                    <img src="~/Content/images/@item.ImageUrl"
+                         alt="@item.ProductName" />
+
+                </div>
+
+
+                @* ==================== THÔNG TIN SẢN PHẨM ==================== *@
+                <div class="checkout-product-info">
+
+                    @* Tên sản phẩm *@
+                    <strong>
+                        @item.ProductName
+                    </strong>
+
+
+                    @* Số lượng khách đang mua *@
+                    <div class="checkout-product-detail">
+                        Số lượng:
+                        <span>@item.Quantity</span>
+                    </div>
+
+
+                    @* Đơn giá của sản phẩm *@
+                    <div class="checkout-product-detail">
+                        Đơn giá:
+
+                        <span>
+                            @item.UnitPrice.ToString("#,##0") đ
+                        </span>
+                    </div>
+
+                </div>
+
+
+                @* ==================== THÀNH TIỀN TỪNG SẢN PHẨM ==================== *@
+                <div class="checkout-product-total">
+
+                    @* LineTotal = UnitPrice × Quantity *@
+                    @item.LineTotal.ToString("#,##0") đ
+
+                </div>
+
+            </div>
+        }
+
+
+        @* ==================== TỔNG TIỀN TOÀN BỘ ĐƠN HÀNG ==================== *@
+        <div class="checkout-grand-total">
+
+            <span>Tổng cộng:</span>
+
+            <strong>
+                @* TotalMoney() cộng LineTotal của tất cả CartItem *@
+                @Model.Cart.TotalMoney().ToString("#,##0") đ
+            </strong>
+
+        </div>
+
+    </aside>
+
+</div>

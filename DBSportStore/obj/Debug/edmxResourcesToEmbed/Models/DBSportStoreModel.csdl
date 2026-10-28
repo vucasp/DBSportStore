@@ -19,7 +19,7 @@
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="UserAccount" Relationship="Self.FK_Customer_UserAccount" FromRole="Customer" ToRole="UserAccount" />
-    <NavigationProperty Name="OrderProes" Relationship="Self.FK_OrderPro_Customer" FromRole="Customer" ToRole="OrderPro" />
+    <NavigationProperty Name="OrderProes" Relationship="DBSportStoreModel.FK_OrderPro_Customer" FromRole="Customer" ToRole="OrderPro" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -30,21 +30,8 @@
     <Property Name="ProductID" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <NavigationProperty Name="OrderPro" Relationship="Self.FK_OrderDetail_OrderPro" FromRole="OrderDetail" ToRole="OrderPro" />
     <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
-  </EntityType>
-  <EntityType Name="OrderPro">
-    <Key>
-      <PropertyRef Name="OrderID" />
-    </Key>
-    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="CustomerID" Type="Int32" Nullable="false" />
-    <Property Name="ShippingAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_OrderPro_Customer" FromRole="OrderPro" ToRole="Customer" />
-    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_OrderPro" FromRole="OrderPro" ToRole="OrderDetail" />
+    <NavigationProperty Name="OrderPro" Relationship="DBSportStoreModel.FK_OrderDetail_OrderPro" FromRole="OrderDetail" ToRole="OrderPro" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -107,30 +94,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderPro_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="OrderPro" Type="Self.OrderPro" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
-      </Principal>
-      <Dependent Role="OrderPro">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_OrderPro">
-    <End Role="OrderPro" Type="Self.OrderPro" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderPro">
-        <PropertyRef Name="OrderID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="OrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OrderDetail_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -159,7 +122,6 @@
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-    <EntitySet Name="OrderProes" EntityType="Self.OrderPro" />
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
@@ -171,14 +133,6 @@
       <End Role="UserAccount" EntitySet="UserAccounts" />
       <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderPro_Customer" Association="Self.FK_OrderPro_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="OrderPro" EntitySet="OrderProes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_OrderPro" Association="Self.FK_OrderDetail_OrderPro">
-      <End Role="OrderPro" EntitySet="OrderProes" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
     <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
       <End Role="Product" EntitySet="Products" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
@@ -187,5 +141,53 @@
       <End Role="Role" EntitySet="Roles" />
       <End Role="UserAccount" EntitySet="UserAccounts" />
     </AssociationSet>
+    <EntitySet Name="OrderProes" EntityType="DBSportStoreModel.OrderPro" />
+    <AssociationSet Name="FK_OrderPro_Customer" Association="DBSportStoreModel.FK_OrderPro_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="OrderPro" EntitySet="OrderProes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_OrderPro" Association="DBSportStoreModel.FK_OrderDetail_OrderPro">
+      <End Role="OrderPro" EntitySet="OrderProes" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="OrderPro">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="ShippingAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="RecipientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="DBSportStoreModel.FK_OrderPro_Customer" FromRole="OrderPro" ToRole="Customer" />
+    <NavigationProperty Name="OrderDetails" Relationship="DBSportStoreModel.FK_OrderDetail_OrderPro" FromRole="OrderPro" ToRole="OrderDetail" />
+  </EntityType>
+  <Association Name="FK_OrderPro_Customer">
+    <End Type="DBSportStoreModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="DBSportStoreModel.OrderPro" Role="OrderPro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="OrderPro">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_OrderPro">
+    <End Type="DBSportStoreModel.OrderPro" Role="OrderPro" Multiplicity="1" />
+    <End Type="DBSportStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderPro">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -39,10 +39,15 @@
                 <a href="#">Quản lý đơn hàng</a>
 
                 @* Các chức năng sẽ thực hiện ở các buổi sau *@
-                <a href="#">Giỏ hàng</a>
-                <
+                @* Giỏ hàng *@
+                @{ Html.RenderAction(
+                        "BagCart",
+                        "ShoppingCart");
+                }
 
-</div>
+            </nav>
+
+        </div>
     </header>
 
     <!-- Nội dung của từng View sẽ được chèn vào đây -->

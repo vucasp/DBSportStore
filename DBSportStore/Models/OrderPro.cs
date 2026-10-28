@@ -26,6 +26,8 @@ namespace DBSportStore.Models
         public string ShippingAddress { get; set; }
         public decimal TotalAmount { get; set; }
         public string Status { get; set; }
+        public string RecipientName { get; set; }
+        public string ShippingPhone { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

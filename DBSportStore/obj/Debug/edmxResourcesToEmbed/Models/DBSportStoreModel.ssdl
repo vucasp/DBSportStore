@@ -38,6 +38,8 @@
     <Property Name="ShippingAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="RecipientName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ShippingPhone" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Product">
     <Key>

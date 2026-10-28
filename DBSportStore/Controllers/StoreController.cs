@@ -87,7 +87,8 @@ namespace DBSportStore.Controllers
                         NamePro = p.ProductName,
                         CategoryName = p.Category.CategoryName,
                         Price = p.Price,
-                        ImagePro = p.ImageUrl
+                        ImagePro = p.ImageUrl,
+                        StockQuantity = p.StockQuantity
                     })
                     .ToList(),
 

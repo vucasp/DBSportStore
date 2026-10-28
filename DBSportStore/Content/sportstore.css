@@ -955,3 +955,396 @@ ul.category-list li a.active-category:hover {
     display: block !important; /* Hiển thị dạng khối để ăn trọn chiều ngang */
     padding-left: 12px; /* Canh lề trái cho đẹp mắt */
 }
+
+/* =========================================================
+   B07 - GIỎ HÀNG
+   ========================================================= */
+/* Cho phép cuộn ngang nếu bảng quá rộng trên màn hình nhỏ */
+.cart-table-wrap {
+    overflow-x: auto;
+}
+
+
+/* Bảng giỏ hàng chiếm toàn bộ chiều rộng */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse; /* Gộp đường viền giữa các ô */
+    background: #ffffff;
+}
+
+
+    /* Định dạng chung cho tiêu đề và ô dữ liệu */
+    .cart-table th,
+    .cart-table td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+
+/* Sắp xếp ảnh và thông tin sản phẩm trên cùng một hàng */
+.cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+    /* Kích thước ảnh sản phẩm trong giỏ */
+    .cart-product img {
+        width: 72px;
+        height: 72px;
+        object-fit: cover; /* Ảnh vừa khung, không méo */
+        border-radius: 10px;
+    }
+
+
+    /* Dòng hiển thị tồn kho */
+    .cart-product small {
+        display: block;
+        margin-top: 4px;
+        color: #64748b;
+    }
+
+
+/* Form cập nhật số lượng nằm trên cùng một hàng */
+.qty-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+    /* Ô nhập số lượng */
+    .qty-form input[type="number"] {
+        width: 75px;
+        padding: 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+    }
+
+
+/* Khối tổng kết giỏ hàng */
+.cart-summary {
+    margin-top: 22px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    /* sắp xếp nội dung theo chiều dọc */
+    display: flex;
+    flex-direction: column;
+    /* tạo khoảng cách giữa các dòng */
+    gap: 10px;
+}
+
+
+/* Tổng tiền */
+.cart-total {
+    margin-top: 0;
+    font-size: 18px;
+    /* tạo khoảng cách dòng đủ lớn */
+    line-height: 1.5;
+}
+
+
+/* Khu vực các nút */
+.cart-summary-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* cách phần tổng tiền phía trên */
+    margin-top: 6px;
+}
+
+/* Khối thông báo chung */
+.cart-message {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+}
+
+
+/* Màu thông báo lỗi */
+.cart-message-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+/* =========================================================
+   B07 - CHECKOUT
+   ========================================================= */
+
+
+/* ==================== BỐ CỤC CHÍNH ==================== */
+
+.checkout-grid {
+    display: grid;
+    /* Cột trái rộng hơn để nhập thông tin,
+       cột phải hiển thị đơn hàng */
+    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+
+/* Khung form và khung đơn hàng */
+.checkout-form,
+.checkout-summary {
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+
+    /* Tiêu đề trong từng khối */
+    .checkout-form h3,
+    .checkout-summary h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+
+/* =========================================================
+   FORM THÔNG TIN KHÁCH HÀNG
+   ========================================================= */
+
+
+/* Mỗi dòng gồm 2 cột:
+   - Label
+   - Ô nhập */
+.checkout-row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    margin-bottom: 16px;
+}
+
+
+/* Cột Label */
+.checkout-label {
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+
+/* Ô nhập chiếm hết chiều rộng cột */
+.checkout-input .form-control-modern {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+}
+
+
+    /* Khi click vào ô nhập */
+    .checkout-input .form-control-modern:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+
+/* Dòng chứa nút submit */
+.checkout-row-action {
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   TÓM TẮT ĐƠN HÀNG
+   ========================================================= */
+
+
+/* Một sản phẩm trong đơn hàng */
+.checkout-product {
+    display: grid;
+    /* Ảnh - thông tin - thành tiền */
+    grid-template-columns: 70px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+/* Ảnh sản phẩm */
+.checkout-product-image img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+}
+
+
+/* Tên sản phẩm */
+.checkout-product-info strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+
+/* Dòng số lượng / đơn giá */
+.checkout-product-detail {
+    margin-top: 3px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+
+    /* Giá trị bên trong thông tin sản phẩm */
+    .checkout-product-detail span {
+        color: #0f172a;
+    }
+
+
+/* Thành tiền từng sản phẩm */
+.checkout-product-total {
+    font-weight: 700;
+    color: #dc2626;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TỔNG TIỀN ĐƠN HÀNG
+   ========================================================= */
+
+.checkout-grand-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 2px solid #e2e8f0;
+    font-size: 18px;
+}
+
+
+    /* Làm nổi bật tổng tiền */
+    .checkout-grand-total strong {
+        color: #dc2626;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    /* Màn hình nhỏ:
+       Form và đơn hàng chuyển thành 1 cột */
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    /* Trên điện thoại:
+       Label nằm trên ô nhập */
+    .checkout-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .checkout-label {
+        padding-top: 0;
+    }
+
+
+    /* Đơn hàng thu gọn còn:
+       ảnh + thông tin */
+    .checkout-product {
+        grid-template-columns: 60px minmax(0, 1fr);
+    }
+
+
+    /* Thành tiền xuống dòng dưới */
+    .checkout-product-total {
+        grid-column: 2;
+    }
+}
+
+/* =========================================================
+   B07 - ORDER SUCCESS
+   ========================================================= */
+
+
+/* ==================== KHỐI BAO TOÀN TRANG ==================== */
+
+.order-success {
+    /* Tạo khoảng trống phía trên và dưới nội dung */
+    padding: 22px 0;
+}
+
+
+/* ==================== PHẦN TIÊU ĐỀ THÀNH CÔNG ==================== */
+
+.order-success-head {
+    /* Tạo khoảng cách với phần thông tin đơn bên dưới */
+    margin-bottom: 20px;
+}
+
+
+/* ==================== BỐ CỤC THÔNG TIN ĐƠN HÀNG ==================== */
+
+.order-info-grid {
+    display: grid;
+    /* Chia thành 2 cột bằng nhau:
+       - cột thông tin đơn hàng
+       - cột thông tin giao hàng */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Khoảng cách giữa 2 cột */
+    gap: 18px;
+    /* Khoảng cách với phần Chi tiết đơn hàng */
+    margin-bottom: 24px;
+}
+
+
+/* ==================== TỪNG KHỐI THÔNG TIN ==================== */
+
+.order-info-card {
+    /* Khoảng cách nội dung với viền */
+    padding: 18px;
+    /* Nền trắng */
+    background: #ffffff;
+    /* Viền xám nhạt */
+    border: 1px solid #e2e8f0;
+    /* Bo tròn 4 góc */
+    border-radius: 12px;
+}
+
+
+    /* Tiêu đề bên trong mỗi card */
+    .order-info-card h3 {
+        /* Bỏ khoảng cách mặc định phía trên của h3 */
+        margin-top: 0;
+    }
+
+
+/* ==================== KHU VỰC NÚT THAO TÁC ==================== */
+
+.order-success-actions {
+    /* Tạo khoảng cách với bảng chi tiết đơn hàng */
+    margin-top: 20px;
+}
+
+
+/* ==================== HIỂN THỊ TRÊN MÀN HÌNH NHỎ ==================== */
+
+/* Khi màn hình có chiều rộng <= 760px */
+@media (max-width: 760px) {
+
+    .order-info-grid {
+        /* Chuyển từ 2 cột thành 1 cột
+           để dễ xem trên điện thoại */
+        grid-template-columns: 1fr;
+    }
+}
